@@ -1,0 +1,144 @@
+
+-- Schema Shopp_TEST
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Shopp_TEST` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `Shopp_TEST` ;
+
+-- -----------------------------------------------------
+-- Table `Shopp_TEST`.`product`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Shopp_TEST`.`product` ;
+
+CREATE TABLE IF NOT EXISTS `Shopp_TEST`.`product` (
+  `pid` VARCHAR(45) NOT NULL,
+  `pname` VARCHAR(100) NULL DEFAULT NULL,
+  `ptype` VARCHAR(20) NULL DEFAULT NULL,
+  `pinfo` VARCHAR(350) NULL DEFAULT NULL,
+  `pprice` DECIMAL(12,2) NULL DEFAULT NULL,
+  `pquantity` INT NULL DEFAULT NULL,
+  `image` LONGBLOB NULL DEFAULT NULL,
+  PRIMARY KEY (`pid`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `Shopp_TEST`.`orders`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Shopp_TEST`.`orders` ;
+
+CREATE TABLE IF NOT EXISTS `Shopp_TEST`.`orders` (
+  `orderid` VARCHAR(45) NOT NULL,
+  `prodid` VARCHAR(45) NOT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  `amount` DECIMAL(10,2) NULL DEFAULT NULL,
+  `shipped` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`orderid`, `prodid`),
+  INDEX `productid_idx` (`prodid` ASC) VISIBLE,
+  CONSTRAINT `productid`
+    FOREIGN KEY (`prodid`)
+    REFERENCES `Shopp_TEST`.`product` (`pid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `Shopp_TEST`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Shopp_TEST`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `Shopp_TEST`.`user` (
+  `email` VARCHAR(60) NOT NULL,
+  `name` VARCHAR(30) NULL DEFAULT NULL,
+  `mobile` BIGINT NULL DEFAULT NULL,
+  `address` VARCHAR(250) NULL DEFAULT NULL,
+  `pincode` INT NULL DEFAULT NULL,
+  `password` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`email`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `Shopp_TEST`.`transactions`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Shopp_TEST`.`transactions` ;
+
+CREATE TABLE IF NOT EXISTS `Shopp_TEST`.`transactions` (
+  `transid` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(60) NULL DEFAULT NULL,
+  `time` DATETIME NULL DEFAULT NULL,
+  `amount` DECIMAL(10,2) NULL DEFAULT NULL,
+  PRIMARY KEY (`transid`),
+  INDEX `truserid_idx` (`username` ASC) VISIBLE,
+  CONSTRAINT `truserid`
+    FOREIGN KEY (`username`)
+    REFERENCES `Shopp_TEST`.`user` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `transorderid`
+    FOREIGN KEY (`transid`)
+    REFERENCES `Shopp_TEST`.`orders` (`orderid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `Shopp_TEST`.`user_demand`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Shopp_TEST`.`user_demand` ;
+
+CREATE TABLE IF NOT EXISTS `Shopp_TEST`.`user_demand` (
+  `username` VARCHAR(60) NOT NULL,
+  `prodid` VARCHAR(45) NOT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`username`, `prodid`),
+  INDEX `prodid_idx` (`prodid` ASC) VISIBLE,
+  CONSTRAINT `userdemailemail`
+    FOREIGN KEY (`username`)
+    REFERENCES `Shopp_TEST`.`user` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `prodid`
+    FOREIGN KEY (`prodid`)
+    REFERENCES `Shopp_TEST`.`product` (`pid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `Shopp_TEST`.`usercart`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Shopp_TEST`.`usercart` ;
+
+CREATE TABLE IF NOT EXISTS `Shopp_TEST`.`usercart` (
+  `username` VARCHAR(60) NULL DEFAULT NULL,
+  `prodid` VARCHAR(45) NULL DEFAULT NULL,
+  `quantity` INT NULL DEFAULT NULL,
+  INDEX `useremail_idx` (`username` ASC) VISIBLE,
+  INDEX `prodidcart_idx` (`prodid` ASC) VISIBLE,
+  CONSTRAINT `useremail`
+    FOREIGN KEY (`username`)
+    REFERENCES `Shopp_TEST`.`user` (`email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `prodidcart`
+    FOREIGN KEY (`prodid`)
+    REFERENCES `Shopp_TEST`.`product` (`pid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
