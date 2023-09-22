@@ -1,0 +1,223 @@
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display+SC:400,700italic,700);
+@import url(https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911);
+
+body {
+  text-align: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-size: 55px;
+  color: #fff;
+  position: absolute;
+  margin: 20px 100px;
+  bottom: 0;
+  right: 0;
+  transition: all .5s;
+  z-index: 9999;
+  transition: all .7s ease;
+}
+
+ul {
+  height: 50px;
+  margin: 100px 0px -10px 0px;
+  list-style-type: none;
+  z-index: 2;
+  transition: all .5s;
+}
+
+li {
+  display: inline-block;
+  margin: 30px 10px;
+  transition: all .5s;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover { 
+  opacity: .5;
+}
+
+.icon-box {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 135px;
+  width: 780px;
+  z-index: 2;
+}
+
+.invert {
+  -webkit-filter: invert(1);
+  filter: invert(1);
+  z-index: -20;
+}
+
+#behance {
+  transform: scale(1.4);
+  margin: 0px 5px 0px 0px;
+}
+
+#ruby {
+  margin: 0px 10px;
+  transform: scale(.9) translateY(-10px);
+}
+
+#andrew {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 80px -30px;
+  z-index: 0;
+}
+
+#FCC {
+  padding: 0px 0px 10px 15px;
+  bottom: 0;
+}
+
+.bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  width: 100%;
+  height: 130px;
+  transition: all .5s ease;
+  z-index: 1;
+}
+
+#watch {
+  position: absolute;
+  display: none;
+  top: 0;
+  margin: 0px -10px;
+  height: 85%;
+  width: 60%;
+  background: #181818;
+  transition: all 2s ease;
+}
+
+#watch:target {
+  display: block;
+}
+
+.click {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 30px;
+  width: 30px;
+  margin: 100px 120px;
+  z-index: 9999;
+} 
+
+.click a:link {
+  font-family: 'Goudy Bookletter 1911', serif;
+  color: #fff;
+  font-size: 20px;
+  background: #181818;
+  border-radius: 50%;
+  padding: 30px 20px;
+}
+
+/* Blinker */
+
+.blinker {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: -100;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 #E9D460;
+  background-color: #E9D460;
+  transform: translate(-80px, 90px);
+  cursor: pointer;
+  -webkit-animation: pulse 2s infinite cubic-bezier;
+  -moz-animation: pulse 2s infinite cubic-bezier;
+  -ms-animation: pulse 2s infinite;
+  animation: pulse 2s infinite;
+}
+
+.click:hover .blinker {
+  opacity: 0;
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 45px #E9D460; 
+    opacity: 0;
+    }
+  }
+@-moz-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 45px #E9D460; 
+    opacity: 0;
+    }
+  }
+@-ms-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 45px #E9D460; 
+    opacity: 0;
+    }
+  }
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 45px #E9D460; 
+    opacity: 0;
+    }
+  }
+
+
+/* Meida Queries */
+
+@media (max-width: 1200px) {
+  h1 {
+    font-size: 45px;
+    margin: 105px 150px;
+  }
+  ul {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: -10px 655px;  }
+  li {
+    margin: 20px 0px;
+    transform: scale(.7);
+  }
+  #behance {
+    transform: scale(1);
+  }
+  #ruby {
+    transform: scale(.7) translateY(-10px);
+  }
+  #watch {
+    width: 100%;
+    height: 78%;
+  }
+  .bar {
+    height: 180px;
+  }
+}
+
+@media (max-width: 600px) {
+  #andrew {
+    display: none 
+  }
+
+  h1 {
+    font-size: 35px;
+  }
+}
