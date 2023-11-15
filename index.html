@@ -934,7 +934,7 @@
             </div>
             <!-- profile photo -->
             <div class="image">
-              <a href="resumedev1.html">
+              <a href="index.html">
                 <noscript>
                   <img src="resume/img/img-profile.jpg" alt="Mr. Bao" />
                 </noscript>
@@ -1171,7 +1171,20 @@
                                       <strong>
                                         <span>Age </span>
                                       </strong>
-                                      <span>23 </span>
+                                      <!-- <span>23 </span> -->
+                                      <span>
+                                        <script>
+                                          function calculate_age(dob) { 
+                                              var diff_ms = Date.now() - dob.getTime();
+                                              var age_dt = new Date(diff_ms); 
+                                            
+                                              return Math.abs(age_dt.getUTCFullYear() - 1970);
+                                          }
+                                          
+                                          document.write(calculate_age(new Date(1999, 10, 16))+"<br/>");
+                                          
+                                          </script>
+                                      </span>
                                     </li>
                                     <li>
                                       <strong>
